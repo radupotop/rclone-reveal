@@ -8,6 +8,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"os"
 )
 
 // crypt internals
@@ -67,5 +68,9 @@ func MustReveal(x string) string {
 }
 
 func main() {
-	fmt.Println(MustReveal("YOUR PSEUDO-ENCRYPTED PASSWORD HERE"))
+	if len(os.Args) < 2 {
+		fmt.Println("Please provide the encoded password as an argument")
+		os.Exit(1)
+	}
+	fmt.Println(MustReveal(os.Args[1]))
 }
