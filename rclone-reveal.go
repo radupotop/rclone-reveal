@@ -50,8 +50,8 @@ func Reveal(x string) (string, error) {
 	if len(ciphertext) < aes.BlockSize {
 		return "", errors.New("input too short when revealing password - is it obscured?")
 	}
-	buf := ciphertext[aes.BlockSize:]
 	iv := ciphertext[:aes.BlockSize]
+	buf := ciphertext[aes.BlockSize:]
 	if err := crypt(buf, buf, iv); err != nil {
 		return "", fmt.Errorf("decrypt failed when revealing password - is it obscured? %w", err)
 	}
